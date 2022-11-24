@@ -64,16 +64,23 @@ function Mesh3DApp() {
     let rotationZ_Matrix = Matrix4.rotationZ(rotationZ);
     let translationMatrix = Matrix4.translation(translateX,translateY, translateZ);
     let perspective = Matrix4.perspective(fieldOfViewRadians, aspectRatio, nearPlaneDistance,farPlaneDistance);
+    
     let mvp = Matrix4.multiply(perspective, Matrix4.multiply(translationMatrix, Matrix4.multiply(rotationX_Matrix, Matrix4.multiply(rotationZ_Matrix, rotationY_Matrix))));
+    const u_mvp = mGlslProgram.getUniformLocation("mat4_transform");
 
     gl.clearColor(rB, gB, bB, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT | gl.DEPTH_BUFFER_BIT);
     
     // Lab 04, 1(a)
     mGlslProgram.use();
+
+     // Lab 04, 1(f)
+     gl.uniformMatrix4fv(u_mvp, true, mvp);
+
     triangleMeshGL.draw();
 
-    // Lab 04, 1(f)
+   
+
 
     requestAnimationFrame(draw);
       // Lab 04, 1(h)
