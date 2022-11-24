@@ -10,7 +10,11 @@ void main()
 {
     //gl_Position = vec4(a_position.xyz, 1);
     gl_Position = vec4(a_position.xyz, 1.0);
-    v_color = a_color;
+
+    //1c
+    v_color = abs(a_position);
+
+
 
     
 }
