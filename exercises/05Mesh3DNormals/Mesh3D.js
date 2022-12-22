@@ -65,7 +65,9 @@ function Mesh3DApp() {
     let translationMatrix = Matrix4.translation(translateX,translateY, translateZ);
     let perspective = Matrix4.perspective(fieldOfViewRadians, aspectRatio, nearPlaneDistance,farPlaneDistance);
     
-    let mvp = Matrix4.multiply(perspective, Matrix4.multiply(translationMatrix, Matrix4.multiply(rotationX_Matrix, Matrix4.multiply(rotationZ_Matrix, rotationY_Matrix))));
+    let mv = Matrix4.multiply(translationMatrix, Matrix4.multiply(rotationX_Matrix, Matrix4.multiply(rotationZ_Matrix, rotationY_Matrix)));
+    
+    let mvp = Matrix4.multiply(perspective, mv);
     const u_mvp = mGlslProgram.getUniformLocation("mat4_transform");
 
     gl.clearColor(rB, gB, bB, 1.0);
@@ -77,6 +79,13 @@ function Mesh3DApp() {
      // Lab 04, 1(f)
      gl.uniformMatrix4fv(u_mvp, true, mvp);
 
+     //Lab05 2e+f
+     const u_mv = mGlslProgram.getUniformLocation("u_mv");
+     //Lab 05 2f
+     gl.uniformMatrix4fv(u_mv, true, mv);
+
+     
+
     triangleMeshGL.draw();
 
    
@@ -87,9 +96,7 @@ function Mesh3DApp() {
       let wireFrameFarbe = mGlslProgram.getUniformLocation("u_wfColor");
       let wireFrameBool = mGlslProgram.getUniformLocation("u_useWireFrame");
 
-      //Lab05 2e+f
-      let mvInvT = mvp;
-      const u_mvInvT = mGlslProgram.getUniformLocation("u_mvInvT");
+      
 
       mGlslProgram.use();
       gl.uniform3f(wireFrameFarbe, rW, gW, bW);

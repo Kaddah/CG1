@@ -9,12 +9,15 @@ out vec3 fs_color;
 uniform mat4 mat4_transform;
 out vec3 fs_normal;
 //Lab05 2e+f
-uniform mat4 u_mvInvT;
+uniform mat4 u_mv;
 
 void main()
 {
     //gl_Position = vec4(a_position.xyz, 1);
     gl_Position = mat4_transform * vec4(a_position.xyz, 1.0);
+
+    //Lab05 2g
+    
 
     //1c
     v_color = abs(a_position);
@@ -23,7 +26,7 @@ void main()
     fs_color = abs(a_normals);
             
     //Lab05 1d
-    fs_normal = a_normals;
+    fs_normal = (u_mv * vec4(a_normals, 0.0)).xyz;
 
 
 
