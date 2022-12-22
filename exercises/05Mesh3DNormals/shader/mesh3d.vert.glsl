@@ -19,7 +19,7 @@ void main()
 
     //Lab05 1b+c
     fs_color = abs(a_normals);
-
+            
     //Lab05 1d
     fs_normal = a_normals;
 
