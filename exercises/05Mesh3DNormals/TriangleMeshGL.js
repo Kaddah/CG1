@@ -21,6 +21,7 @@ export class TriangleMeshGL{
         const triangles     = simpleMeshIO.indices;
         const positions     = simpleMeshIO.positions;
         const colors        = simpleMeshIO.colors;
+        const normals       = simpleMeshIO.normals;
 
         const positionAttributeLocation = 0;
         this.positions = gl.createBuffer();
@@ -46,7 +47,16 @@ export class TriangleMeshGL{
         gl.bindBuffer(gl.ELEMENT_ARRAY_BUFFER, ib);
         gl.bufferData(gl.ELEMENT_ARRAY_BUFFER, new Uint32Array(triangles), gl.STATIC_DRAW);
 
-        
+        //Lab05 1a
+        const normalsBuffer = gl.createBuffer();
+        const normalAttributeLocation = 2;
+        gl.bindBuffer(gl.ARRAY_BUFFER, normalsBuffer);
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(normals), gl.STATIC_DRAW);
+        gl.vertexAttribPointer(normalAttributeLocation, 3, gl.FLOAT, false, 0, 0);
+        gl.enableVertexAttribArray(normalAttributeLocation);
+
+
+
         this.vaoWireFrame = gl.createVertexArray();
         gl.bindVertexArray(this.vaoWireFrame);
         gl.bindBuffer(gl.ARRAY_BUFFER, this.positions);
