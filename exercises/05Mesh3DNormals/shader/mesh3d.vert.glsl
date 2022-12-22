@@ -8,6 +8,8 @@ out vec3 v_color;
 out vec3 fs_color;
 uniform mat4 mat4_transform;
 out vec3 fs_normal;
+//Lab05 2e+f
+uniform mat4 u_mvInvT;
 
 void main()
 {

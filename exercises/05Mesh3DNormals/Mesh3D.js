@@ -87,6 +87,10 @@ function Mesh3DApp() {
       let wireFrameFarbe = mGlslProgram.getUniformLocation("u_wfColor");
       let wireFrameBool = mGlslProgram.getUniformLocation("u_useWireFrame");
 
+      //Lab05 2e+f
+      let mvInvT = mvp;
+      const u_mvInvT = mGlslProgram.getUniformLocation("u_mvInvT");
+
       mGlslProgram.use();
       gl.uniform3f(wireFrameFarbe, rW, gW, bW);
 
