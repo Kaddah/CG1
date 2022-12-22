@@ -7,6 +7,7 @@ layout(location = 2) in vec3 a_normals;
 out vec3 v_color;
 out vec3 fs_color;
 uniform mat4 mat4_transform;
+out vec3 fs_normal;
 
 void main()
 {
@@ -18,6 +19,9 @@ void main()
 
     //Lab05 1b+c
     fs_color = abs(a_normals);
+
+    //Lab05 1d
+    fs_normal = a_normals;
 
 
 
